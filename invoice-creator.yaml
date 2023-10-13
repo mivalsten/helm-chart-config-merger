@@ -1,0 +1,17 @@
+config:
+  values:
+    replicas: 0
+  Staging:
+    R1:
+      primary:
+        replicas: 1
+        requests:
+          cpu: 100m
+          mem: 100Mi
+  Production:
+    R1:
+      primary:
+        replicas: 1
+        requests:
+          cpu: 600m
+          mem: 1000Mi

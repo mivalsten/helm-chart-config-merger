@@ -1,0 +1,14 @@
+# Add this to the start of the file to replace .Values with calculatedValues
+{{- $conf := include "helper.calculatedValues" . | fromYaml -}}
+{{- with dict "Values" $conf "Release" .Release "Chart" .Chart }}
+
+{{. | toYaml }}
+
+{{- end }}
+
+---
+
+# alternatively, you can also do it like that:
+{{- $calc := include "helper.calculatedValues" . | fromYaml -}}
+
+{{ $calc | toYaml }}
