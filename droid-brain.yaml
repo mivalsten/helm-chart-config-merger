@@ -1,54 +1,53 @@
+root_level_property: "exists"
 config:
-  values:
-    replicas: 2
+  replicas: 2
   Staging:
-    values:
-      requests:
-        cpu: 100m
-        mem: 100Mi
+    requests:
+      cpu: 100m
+      mem: 100Mi
     R1:
-      values:
-        keda:
-          serviceBus:
-            namespace:
-              primary: "dm-r1ew1-primary-sb-s"
-              secondary: "dm-r1en1-secondary-sb-s"
-            queueName: 
-            - name: "company_$teamEnv_r1_droidbraininbox_transactional"
-              depthTrigger: 250
-            maxReplicaCount: 6
+      keda:
+        serviceBus:
+          namespace:
+            primary: "dm-r1ew1-primary-sb-s"
+            secondary: "dm-r1en1-secondary-sb-s"
+          queueName: 
+          - name: "company_$teamEnv_r1_droidbraininbox_transactional"
+            depthTrigger: 250
+          maxReplicaCount: 6
+      zone1:
       zone2:
         replicas: 0
         keda:
           serviceBus:
             maxReplicaCount: 0
     R2:
-      values:
-          keda:
-            serviceBus:
-              namespace:
-                primary: "dm-r2ue2-primary-sb-s"
-                secondary: "dm-r2uc1-secondary-sb-s"
-              queueName: 
-              - name: "company_$teamEnv_r2_droidbraininbox_transactional"
-                depthTrigger: 150
-              maxReplicaCount: 4
+      keda:
+        serviceBus:
+          namespace:
+            primary: "dm-r2ue2-primary-sb-s"
+            secondary: "dm-r2uc1-secondary-sb-s"
+          queueName: 
+          - name: "company_$teamEnv_r2_droidbraininbox_transactional"
+            depthTrigger: 150
+          maxReplicaCount: 4
+      zone1:
       zone2:
         replicas: 0
         keda:
           serviceBus:
             maxReplicaCount: 0
     R3:
-      values:
-        keda:
-          serviceBus:
-            namespace:
-              primary: "dm-r3ae1-primary-sb-s"
-              secondary: "dm-r3as1-secondary-sb-s"
-            queueName: 
-            - name: "company_$teamEnv_r3_droidbraininbox_transactional"
-              depthTrigger: 150
-            maxReplicaCount: 4
+      keda:
+        serviceBus:
+          namespace:
+            primary: "dm-r3ae1-primary-sb-s"
+            secondary: "dm-r3as1-secondary-sb-s"
+          queueName: 
+          - name: "company_$teamEnv_r3_droidbraininbox_transactional"
+            depthTrigger: 150
+          maxReplicaCount: 4
+      zone1:
       zone2:
         replicas: 0
         keda:
@@ -56,58 +55,58 @@ config:
             maxReplicaCount: 0
   Production:
     R1:
-      values:
-        replicas: 4
-        requests:
-          cpu: 1600m
-          mem: 1000Mi
-        keda:
-          serviceBus:
-            namespace:
-              primary: "dm-messaging-company-prem"
-              secondary: "dm-r1en1-secondary-sb-p"
-            queueName: 
-            - name: "droidbraininbox_transactional"
-              depthTrigger: 650
-            maxReplicaCount: 16
+      replicas: 4
+      requests:
+        cpu: 1600m
+        mem: 1000Mi
+      keda:
+        serviceBus:
+          namespace:
+            primary: "dm-messaging-company-prem"
+            secondary: "dm-r1en1-secondary-sb-p"
+          queueName: 
+          - name: "droidbraininbox_transactional"
+            depthTrigger: 650
+          maxReplicaCount: 16
+      zone1:
       zone2:
         replicas: 0
         keda:
           serviceBus:
             maxReplicaCount: 0
     R2:
-      values:
-        requests:
-          cpu: 900m
-          mem: 1000Mi
-        keda:
-          serviceBus:
-            namespace:
-              primary: "dm-r2ue2-primary-sb-p"
-              secondary: "dm-r2uc1-secondary-sb-p"
-            queueName: 
-            - name: "droidbraininbox_transactional"
-              depthTrigger: 625
-            maxReplicaCount: 8
+      requests:
+        cpu: 900m
+        mem: 1000Mi
+      keda:
+        serviceBus:
+          namespace:
+            primary: "dm-r2ue2-primary-sb-p"
+            secondary: "dm-r2uc1-secondary-sb-p"
+          queueName: 
+          - name: "droidbraininbox_transactional"
+            depthTrigger: 625
+          maxReplicaCount: 8
+      zone1:
       zone2:
         replicas: 0
         keda:
           serviceBus:
             maxReplicaCount: 0
     R3:
-      values:
-        requests:
-          cpu: 1300m
-          mem: 1000Mi
-        keda:
-          serviceBus:
-            namespace:
-              primary: "dm-r3ae1-primary-sb-p"
-              secondary: "dm-r3as1-secondary-sb-p"
-            queueName: 
-            - name: "droidbraininbox_transactional"
-              depthTrigger: 500
-            maxReplicaCount: 8
+      requests:
+        cpu: 1300m
+        mem: 1000Mi
+      keda:
+        serviceBus:
+          namespace:
+            primary: "dm-r3ae1-primary-sb-p"
+            secondary: "dm-r3as1-secondary-sb-p"
+          queueName: 
+          - name: "droidbraininbox_transactional"
+            depthTrigger: 500
+          maxReplicaCount: 8
+      zone1:
       zone2:
         replicas: 0
         keda:

@@ -9,6 +9,6 @@
 ---
 
 # alternatively, you can also do it like that:
-{{- $calc := include "helper.calculatedValues" . | fromYaml -}}
+{{ $calc := include "helper.calculatedValues" . | fromYaml -}}
 
-{{ $calc | toYaml }}
+{{$calc | toYaml }}

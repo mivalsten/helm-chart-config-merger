@@ -1,6 +1,19 @@
+{{- define "helper.RegionsAndZones" -}}
+    {{- $keys := .Keys -}}
+    {{- $ret := list -}}
+    {{- range $elem := $keys -}}
+        {{- if regexMatch "^R.*" $elem -}}
+            {{- $ret = append $ret $elem -}}
+        {{- else if regexMatch "^zone.*" $elem -}}
+            {{- $ret = append $ret $elem -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $ret -}}
+{{- end -}}
+
 {{- define "helper.calculatedValues" -}}
     {{- $empty := dict "values" dict -}}
-    {{- $common := .Values.config.values -}} 
+    {{- $common := .Values.config -}} 
     {{- $env := .Values.env -}}
     {{- $reg := .Values.region -}}
     {{- $zone := .Values.zone -}}
@@ -18,10 +31,27 @@
 {{ $zoneVals | toYaml */}}
 
 #final config
-{{ mergeOverwrite 
+{{ $merged := mergeOverwrite 
     ($common | default dict)
-    ($envVals.values | default dict)
-    ($regVals.values | default dict)
-    $zoneVals | toYaml }}
+    ($envVals | default dict)
+    ($regVals | default dict)
+    $zoneVals }}
+
+{{- $allKeys := keys $merged -}}
+{{- $keysToRemove := list -}}
+{{- range $elem := $allKeys -}}
+    {{- if regexMatch "^R.*" $elem -}}
+        {{- $keysToRemove = append $keysToRemove $elem -}}
+    {{- else if regexMatch "^zone.*" $elem -}}
+        {{- $keysToRemove = append $keysToRemove $elem -}}
+    {{- end -}}
+{{- end -}}
+{{- $keysToRemove = append $keysToRemove "Staging" -}}
+{{- $keysToRemove = append $keysToRemove "Production" -}}
+
+{{ range $keysToRemove }}
+    {{ $merged = omit ($merged) . }}
+{{- end }}
+{{$merged | toYaml }}
 
 {{- end -}}
