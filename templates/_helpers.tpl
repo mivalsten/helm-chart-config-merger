@@ -40,9 +40,9 @@
 {{- $allKeys := keys $merged -}}
 {{- $keysToRemove := list -}}
 {{- range $elem := $allKeys -}}
-    {{- if regexMatch "^R.*" $elem -}}
+    {{- if regexMatch "^R\\d+$" $elem -}}
         {{- $keysToRemove = append $keysToRemove $elem -}}
-    {{- else if regexMatch "^zone.*" $elem -}}
+    {{- else if regexMatch "^zone\\d+$" $elem -}}
         {{- $keysToRemove = append $keysToRemove $elem -}}
     {{- end -}}
 {{- end -}}
